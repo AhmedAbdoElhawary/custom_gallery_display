@@ -96,7 +96,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   ElevatedButton normal3(BuildContext context) {
-
     return ElevatedButton(
       onPressed: () async {
         Navigator.of(context).push(CupertinoDialogRoute(

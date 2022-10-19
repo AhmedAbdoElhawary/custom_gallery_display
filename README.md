@@ -52,8 +52,8 @@ If editing `Info.plist` as text, add:
 * Change the minimum Android sdk version to 21 (or higher), and compile sdk to 31 (or higher) in your `android/app/build.gradle` file.
 
 ```java
-compileSdkVersion 33
-        minSdkVersion 21
+    compileSdkVersion 33
+    minSdkVersion 21
 ```
 
 * Add this permission into your AndroidManifest.xml
@@ -61,16 +61,16 @@ compileSdkVersion 33
 <manifest>
     ...
     <application
-        ...
-        <activity
-        ...
-        android:requestLegacyExternalStorage="true"
-         ...
-        </activity>
-        ...
+    ...
+    <activity
+    ...
+    android:requestLegacyExternalStorage="true"
+    ...
+</activity>
+    ...
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
-</manifest>
+<uses-permission android:name="android.permission.INTERNET"/>
+    </manifest>
 ````
 
 ### 1. Depend on it
@@ -114,21 +114,21 @@ import 'package:custom_gallery_display/custom_gallery_display.dart';
 
 ```dart
     CustomGalleryDisplay.instagramDisplay(
-        displaySource: DisplaySource.both,
-        pickerSource: PickerSource.both,
-        multiSelection: true,
-        cropImage: true, // It's true by default
-        galleryDisplaySettings: GalleryDisplaySettings(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              crossAxisSpacing: 1.7,
-              mainAxisSpacing: 1.5), // It's true by default
-        ),
-        onDone: (SelectedImagesDetails details) async {
-          bool multiSelectionMode = details.multiSelectionMode;
-          List<SelectedByte> selectedFiles = details.selectedFiles;
-          double aspectRatio = details.aspectRatio;
-        });
+displaySource: DisplaySource.both,
+pickerSource: PickerSource.both,
+multiSelection: true,
+cropImage: true, // It's true by default
+galleryDisplaySettings: GalleryDisplaySettings(
+gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+crossAxisCount: 4,
+crossAxisSpacing: 1.7,
+mainAxisSpacing: 1.5), // It's true by default
+),
+onDone: (SelectedImagesDetails details) async {
+bool multiSelectionMode = details.multiSelectionMode;
+List<SelectedByte> selectedFiles = details.selectedFiles;
+double aspectRatio = details.aspectRatio;
+});
 ```
 
 <p>
