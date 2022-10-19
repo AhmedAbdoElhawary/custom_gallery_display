@@ -132,7 +132,7 @@ import 'package:custom_gallery_display/custom_gallery_display.dart';
 ```
 
 <p>
-<img src="https://user-images.githubusercontent.com/88978546/173691000-0b9db0fa-504e-428c-acdf-7b1ab414dcf9.jpg"    width="25%" height="50%">
+<img src="https://user-images.githubusercontent.com/88978546/196822436-62b4d961-c459-4a23-92c7-f3321e75e4fe.jpg"    width="25%" height="50%">
 
 </p>
 
@@ -153,10 +153,44 @@ import 'package:custom_gallery_display/custom_gallery_display.dart';
           double aspectRatio = details.aspectRatio;
         });
 ```
+<p>
+<img src="https://user-images.githubusercontent.com/88978546/196822357-64206d63-b52a-4816-9b6b-439f423a7131.jpg"   width="25%" height="50%">
+<img src="https://user-images.githubusercontent.com/88978546/196822364-f948b798-5c32-4fbc-b7e0-aa06b56340c7.jpg"   width="25%" height="50%">
+
+</p>
+
+```dart
+
+    CustomGalleryDisplay.instagramDisplay(
+        displaySource: DisplaySource.both,
+        pickerSource: PickerSource.both,
+        multiSelection: true,
+        cropImage: false,
+        galleryDisplaySettings: GalleryDisplaySettings(
+          appTheme:
+              AppTheme(primaryColor: Colors.black, focusColor: Colors.white),
+          tabsTexts: TabsTexts(
+            videoText: "視頻",
+            photoText: "照片",
+            galleryText: "畫廊",
+            deletingText: "刪除",
+            clearImagesText: "清除所選圖像",
+            limitingText: "限制為 10 張照片或視頻",
+          ),
+        ),
+        onDone: (SelectedImagesDetails details) async {
+          bool multiSelectionMode = details.multiSelectionMode;
+          List<SelectedByte> selectedFiles = details.selectedFiles;
+          double aspectRatio = details.aspectRatio;
+        });
+```
+
 
 <p>
-<img src="https://user-images.githubusercontent.com/88978546/173691016-f5b968ae-545e-4efc-81ff-405873678869.jpg"   width="25%" height="50%">
-<img src="https://user-images.githubusercontent.com/88978546/173691025-5be932e0-0e1d-42c8-b88f-cff0606dd0d1.jpg"    width="25%" height="50%">
+<img src="https://user-images.githubusercontent.com/88978546/196822496-d76c109e-e03a-468e-b998-7bcdb75ff65f.jpg"   width="25%" height="50%">
+<img src="https://user-images.githubusercontent.com/88978546/196822525-1c7ba574-1b5d-4eb8-a600-a12a6872b00c.jpg"   width="25%" height="50%">
+<img src="https://user-images.githubusercontent.com/88978546/196822536-2a429562-bc07-4602-9ef2-4101994cf2e4.jpg"   width="25%" height="50%">
+
 
 </p>
 
@@ -192,34 +226,3 @@ import 'package:custom_gallery_display/custom_gallery_display.dart';
           double aspectRatio = details.aspectRatio;
         });
 ```
-<p>
-<img src="https://user-images.githubusercontent.com/88978546/173691042-d585a6da-cde6-4f7d-b228-f1384b36ea98.jpg"   width="25%" height="50%">
-
-</p>
-
-```dart
-
-    CustomGalleryDisplay.instagramDisplay(
-        displaySource: DisplaySource.both,
-        pickerSource: PickerSource.both,
-        multiSelection: true,
-        cropImage: false,
-        galleryDisplaySettings: GalleryDisplaySettings(
-          appTheme:
-              AppTheme(primaryColor: Colors.black, focusColor: Colors.white),
-          tabsTexts: TabsTexts(
-            videoText: "視頻",
-            photoText: "照片",
-            galleryText: "畫廊",
-            deletingText: "刪除",
-            clearImagesText: "清除所選圖像",
-            limitingText: "限制為 10 張照片或視頻",
-          ),
-        ),
-        onDone: (SelectedImagesDetails details) async {
-          bool multiSelectionMode = details.multiSelectionMode;
-          List<SelectedByte> selectedFiles = details.selectedFiles;
-          double aspectRatio = details.aspectRatio;
-        });
-```
-
