@@ -106,7 +106,6 @@ class CustomGalleryDisplayState extends State<CustomGalleryDisplay>
         (showGallery && enableVideo) ||
         (showGallery && enableCamera);
 
-
     cameraVideoOnlyEnabled =
         cameraAndVideoEnabled && widget.displaySource == DisplaySource.camera;
     showAllTabs = cameraAndVideoEnabled && showGallery;
