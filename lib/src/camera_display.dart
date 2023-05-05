@@ -131,7 +131,7 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
   Widget buildBody() {
     Color whiteColor = widget.appTheme.primaryColor;
     File? selectedImage = widget.selectedCameraImage.value;
-    double previewHeight = MediaQuery.of(context).size.height / 2;
+    double previewHeight = MediaQuery.of(context).size.height;
     return Column(
       children: [
         appBar(),
@@ -164,17 +164,17 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
   }
 
   Align buildPickImageContainer(Color whiteColor, BuildContext context) {
-    double previewHeight = MediaQuery.of(context).size.height / 2;
+    double previewHeight = MediaQuery.of(context).size.height;
 
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
         height: previewHeight - 100,
-        color: whiteColor,
+        color: Colors.transparent,
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 1.0),
@@ -188,21 +188,22 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
                 ),
               ),
             ),
-            const Spacer(),
+            // const Spacer(),
             Stack(
               alignment: Alignment.topCenter,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(60),
                   child: Align(
                     alignment: Alignment.center,
                     child: cameraButton(context),
                   ),
                 ),
-                Positioned(bottom: 120, child: videoStatusAnimation),
+                Positioned(bottom: 20, child: videoStatusAnimation),
               ],
             ),
-            const Spacer(),
+            SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),
@@ -211,7 +212,7 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
 
   Align buildFlashIcons() {
     return Align(
-      alignment: Alignment.centerRight,
+      alignment: Alignment.topRight,
       child: IconButton(
         onPressed: () {
           setState(() {
@@ -348,7 +349,7 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
         backgroundColor: Colors.grey[400],
         radius: 40,
         child: CircleAvatar(
-          radius: 24,
+          radius: 25,
           backgroundColor: whiteColor,
         ),
       ),
