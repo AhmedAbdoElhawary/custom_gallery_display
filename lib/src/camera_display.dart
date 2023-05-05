@@ -131,63 +131,50 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
   Widget buildBody() {
     Color whiteColor = widget.appTheme.primaryColor;
     File? selectedImage = widget.selectedCameraImage.value;
-    double previewHeight = MediaQuery
-        .of(context)
-        .size
-        .height * 0.7;
-    return Scaffold(
-      appBar: appBar(),
-      body: Column(
-        children: [
-          Flexible(
-            child: Stack(
-              children: [
-                if (selectedImage == null) ...[
-                  SizedBox(
-                    height: double.infinity,
+    double previewHeight = MediaQuery.of(context).size.height;
+    return Column(
+      children: [
+        appBar(),
+        Flexible(
+          child: Stack(
+            children: [
+              if (selectedImage == null) ...[
+                SizedBox(
+                  width: double.infinity,
+                  child: CameraPreview(controller),
+                ),
+              ] else ...[
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    color: whiteColor,
+                    height: previewHeight + 10,
                     width: double.infinity,
-                    child: AspectRatio(
-                      aspectRatio: controller.value.aspectRatio,
-                      child: CameraPreview(controller),
-                    ),
+                    child: buildCrop(selectedImage),
                   ),
-                ] else
-                  ...[
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        color: whiteColor,
-                        height: previewHeight + 10,
-                        width: double.infinity,
-                        child: buildCrop(selectedImage),
-                      ),
-                    )
-                  ],
-                buildFlashIcons(),
-                buildPickImageContainer(whiteColor, context),
+                )
               ],
-            ),
+              buildFlashIcons(),
+              buildPickImageContainer(whiteColor, context),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   Align buildPickImageContainer(Color whiteColor, BuildContext context) {
-    double previewHeight = MediaQuery
-        .of(context)
-        .size
-        .height * 0.3;
+    double previewHeight = MediaQuery.of(context).size.height;
 
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
         height: previewHeight - 100,
-        color: whiteColor,
+        color: Colors.transparent,
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 1.0),
@@ -201,19 +188,22 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
                 ),
               ),
             ),
-            const Spacer(),
+            // const Spacer(),
             Stack(
               alignment: Alignment.topCenter,
               children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: cameraButton(context),
+                Container(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: cameraButton(context),
+                  ),
                 ),
-
-                Positioned(bottom: 120, child: videoStatusAnimation),
+                Positioned(bottom: 20, child: videoStatusAnimation),
               ],
             ),
-            const Spacer(),
+            SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),
@@ -222,7 +212,7 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
 
   Align buildFlashIcons() {
     return Align(
-      alignment: Alignment.topCenter,
+      alignment: Alignment.topRight,
       child: IconButton(
         onPressed: () {
           setState(() {
@@ -233,16 +223,16 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
           currentFlashMode == Flash.on
               ? controller.setFlashMode(FlashMode.torch)
               : currentFlashMode == Flash.off
-              ? controller.setFlashMode(FlashMode.off)
-              : controller.setFlashMode(FlashMode.auto);
+                  ? controller.setFlashMode(FlashMode.off)
+                  : controller.setFlashMode(FlashMode.auto);
         },
         icon: Icon(
             currentFlashMode == Flash.on
                 ? Icons.flash_on_rounded
                 : (currentFlashMode == Flash.auto
-                ? Icons.flash_auto_rounded
-                : Icons.flash_off_rounded),
-            color: Colors.white,size: 20,),
+                    ? Icons.flash_auto_rounded
+                    : Icons.flash_off_rounded),
+            color: Colors.white),
       ),
     );
   }
@@ -266,11 +256,11 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
     return AppBar(
       backgroundColor: whiteColor,
       elevation: 0,
-      leading: InkWell(
-        onTap: ()=>Navigator.pop(context),
-        child: Icon(Icons.close,
-            color: Colors.white
-        ),
+      leading: IconButton(
+        icon: Icon(Icons.clear_rounded, color: blackColor, size: 30),
+        onPressed: () {
+          Navigator.of(context).maybePop(null);
+        },
       ),
       actions: <Widget>[
         AnimatedSwitcher(
@@ -283,7 +273,7 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
               if (widget.videoRecordFile.value != null &&
                   !widget.clearVideoRecord.value) {
                 Uint8List byte =
-                await widget.videoRecordFile.value!.readAsBytes();
+                    await widget.videoRecordFile.value!.readAsBytes();
                 SelectedByte selectedByte = SelectedByte(
                   isThatImage: false,
                   selectedFile: widget.videoRecordFile.value!,
@@ -359,7 +349,7 @@ class CustomCameraDisplayState extends State<CustomCameraDisplay> {
         backgroundColor: Colors.grey[400],
         radius: 40,
         child: CircleAvatar(
-          radius: 24,
+          radius: 25,
           backgroundColor: whiteColor,
         ),
       ),
